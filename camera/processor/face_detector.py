@@ -22,16 +22,16 @@ class FaceDetector(object):
         self.vs.stop()
         return jpeg.tobytes()
 
-#     def flip_if_needed(self, frame):
-#         if self.flip:
-#             return np.flip(frame, 0)
-#         return frame
+    def flip_if_needed(self, frame):
+        if self.flip:
+            return np.flip(frame, 0)
+        return frame
 
-#     def get_frame(self):
-#         frame = self.flip_if_needed(self.vs.read())
-#         frame = self.process_image(frame)
-#         ret, jpeg = cv2.imencode('.jpg', frame)
-#         return jpeg.tobytes()
+    def get_frame(self):
+        frame = self.flip_if_needed(self.vs.read())
+        frame = self.process_image(frame)
+        ret, jpeg = cv2.imencode('.jpg', frame)
+        return jpeg.tobytes()
     
     def process_image(self, frame):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
