@@ -10,11 +10,15 @@ class FaceDetector(object):
         self.vs = PiVideoStream(resolution=(800, 608)).start()
         self.flip = flip
         time.sleep(2.0)
-
-        # opencvの顔分類器(CascadeClassifier)をインスタンス化する
+        
+        self.argvs = sys.argv
+        self.face_cascade = cv2.CascadeClassifier('camera/processor/model/haarcascades/haarcascade_frontalface_default.xml')
+        if len(self.argvs) >= 2 and "eyes" in self.argvs:
+            self.eye_cascade = cv2.CascadeClassifier('camera/processor/model/haarcascades/haarcascade_eye.xml')
 
     def __del__(self):
         self.vs.stop()
+        return jpeg.tobytes()
 
     def flip_if_needed(self, frame):
         if self.flip:
